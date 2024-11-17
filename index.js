@@ -1,5 +1,7 @@
 const express = require('express');
 const axios = require('axios');
+require('dotenv').config();
+
 
 const app = express();
 
@@ -22,12 +24,12 @@ app.listen(3000, () => {
 
 app.get('/weather/:city', async (req, res) => {
     const city = req.params.city;
-    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=126c7e03b76f870a01b812c6e518b3f0&units=metric&lang=fr`;
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.API}&units=metric&lang=fr`;
 
     try {
         const response = await axios.get(apiUrl);
         res.json({
-            
+
             city: response.data.name,
             temperature: response.data.main.temp,
             ressentie: response.data.main.feels_like,

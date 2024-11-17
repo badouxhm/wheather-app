@@ -27,6 +27,7 @@ app.get('/weather/:city', async (req, res) => {
     try {
         const response = await axios.get(apiUrl);
         res.json({
+            
             city: response.data.name,
             temperature: response.data.main.temp,
             ressentie: response.data.main.feels_like,
@@ -40,6 +41,7 @@ app.get('/weather/:city', async (req, res) => {
 
         });
         const weatherData = {
+
             "city": response.data.name,
             "temperature": response.data.main.temp,
             "ressentie": response.data.main.feels_like,
@@ -50,6 +52,7 @@ app.get('/weather/:city', async (req, res) => {
             "visibility": response.data.visibility,
             "lever": (response.data.sys.sunrise ),
             "coucher": (response.data.sys.sunset ),
+            
         };
         const leverDate = new Date(weatherData.lever * 1000).toLocaleString();
         const coucherDate = new Date(weatherData.coucher * 1000).toLocaleString();
@@ -65,8 +68,10 @@ app.get('/weather/:city', async (req, res) => {
         console.log(`\x1b[1mVisibilité: \x1b[0m${weatherData.visibility / 1000} km`);
         console.log(`\x1b[1mLever du soleil: \x1b[0m${leverDate}`);
         console.log(`\x1b[1mCoucher du soleil: \x1b[0m ${coucherDate}`);
+
+
     } catch (error) {
-        res.status(500).json({ error: 'Error fetching weather data', details: error.message });
+        res.status(500).json({ error: 'Error fetching data', details: error.message });
     }
 });
 
